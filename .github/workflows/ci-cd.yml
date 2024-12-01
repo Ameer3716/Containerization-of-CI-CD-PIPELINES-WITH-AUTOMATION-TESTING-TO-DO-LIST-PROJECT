@@ -17,6 +17,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    
     # Set up Node.js
     - name: Set up Node.js
       uses: actions/setup-node@v3
@@ -27,6 +28,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+      - name: Ensure Jest permissions
+      run: chmod +x ./node_modules/.bin/jest
     # Run tests
     - name: Run Tests
       run: npm test
@@ -35,6 +38,7 @@ jobs:
     - name: Build Docker image
       run: docker build -t todo-app .
 
+         
     # Push Docker image to GitHub Container Registry (Optional)
     - name: Push to GitHub Container Registry
       if: github.event_name == 'push'
