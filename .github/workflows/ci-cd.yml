@@ -39,17 +39,17 @@ jobs:
     - name: Build Docker image
       run: docker build -t todo-app .
 
-    # Push Docker image to GitHub Container Registry (Optional)
+    # Push Docker image to GitHub Container Registry
     - name: Push to GitHub Container Registry
       if: github.event_name == 'push'
       uses: docker/login-action@v2
       with:
         registry: ghcr.io
-        username: ${{ secrets.ameer3716 }}
-        password: ${{ secrets.Ameer@3716 }}
+        username: ${{ secrets.DOCKER_USERNAME }}  # Use the secret for username
+        password: ${{ secrets.DOCKER_TOKEN }}      # Use the secret for token/password
 
     - name: Push Docker Image
       if: github.event_name == 'push'
       run: |
-        docker tag todo-app ghcr.io/<your-username>/todo-app:latest
-        docker push ghcr.io/<your-username>/todo-app:latest
+        docker tag todo-app ghcr.io/ameer3716/todo-app:latest
+        docker push ghcr.io/ameer3716/todo-app:latest
